@@ -16,5 +16,8 @@ Règles obligatoires : lire et appliquer [outils.md](outils.md) avant tout déve
 ## Projet : tableau de bord perso
 - Stack : Vite + React 19 + Tailwind 4 + framer-motion + lucide-react.
 - `npm run dev` (dev), `npm run build`, `npm run preview`.
-- Données de démo dans `src/data.js` ; une carte = un fichier dans `src/components/`.
+- Données : `src/data.js` (portefeuille Revolut et projets réels, le reste en démo), `src/sport.js` (exercices + formules), `src/house/` (plan, réseaux, calculs de la maison).
+- Pages dans `src/pages/` (routage par hash dans `App.jsx`, entrées de menu dans `src/nav.js`) ; cartes dans `src/components/`.
+- `npm run check` : tests des formules, du portefeuille et de la cohérence du plan. `npm run deploy` : build + Cloudflare Workers.
+- La 3D (three.js) est chargée à la demande dans `src/house/House3D.jsx`.
 - Couleurs = tokens `@theme` dans `src/index.css` (pas de hex dans les composants).

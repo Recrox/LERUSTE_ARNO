@@ -10,14 +10,52 @@
   --color-line: #e2e0ec;
   --color-night: #231c4d;
   --color-night-2: #2f2766;
+  /* Encre des données (barres, jauges, interrupteurs) : séparée de night pour rester lisible en sombre. */
+  --color-data: #231c4d;
+  --color-focus: #231c4d;
   --color-lime: #d4f25a;
   --color-lime-ink: #8aa61c;
   --color-up: #1f8a4c;
   --color-down: #c2410c;
 }
 
+/* Thème sombre : suit le système, sauf choix explicite via data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-canvas: #0f0e17;
+    --color-surface: #19172a;
+    --color-ink: #ecebf5;
+    --color-muted: #9b98b3;
+    --color-line: #2b2842;
+    --color-night: #2a2262;
+    --color-night-2: #3a3180;
+    --color-data: #9187f0;
+    --color-focus: #d4f25a;
+    --color-lime-ink: #b5d43a;
+    --color-up: #4cc583;
+    --color-down: #f08a52;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #0f0e17;
+  --color-surface: #19172a;
+  --color-ink: #ecebf5;
+  --color-muted: #9b98b3;
+  --color-line: #2b2842;
+  --color-night: #2a2262;
+  --color-night-2: #3a3180;
+  --color-data: #9187f0;
+  --color-focus: #d4f25a;
+  --color-lime-ink: #b5d43a;
+  --color-up: #4cc583;
+  --color-down: #f08a52;
+}
+
 body { @apply bg-canvas text-ink font-sans antialiased; }
-:focus-visible { outline: 2px solid var(--color-night); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+dialog::backdrop { background: rgb(15 14 23 / 0.5); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

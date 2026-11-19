@@ -40,7 +40,7 @@ export default function ActivityCard() {
             tabIndex={tab === t.id ? 0 : -1}
             onClick={() => setTab(t.id)}
             onKeyDown={(e) => onKey(e, i)}
-            className={`-mb-px border-b-2 px-2 py-1.5 text-xs font-medium ${tab === t.id ? 'border-night text-ink' : 'border-transparent text-muted hover:text-ink'}`}
+            className={`-mb-px border-b-2 px-2 py-1.5 text-xs font-medium ${tab === t.id ? 'border-data text-ink' : 'border-transparent text-muted hover:text-ink'}`}
           >
             {t.label}
           </button>
@@ -51,7 +51,7 @@ export default function ActivityCard() {
           const Icon = icons[a.kind];
           return (
             <li key={a.title} className="flex gap-3 rounded-lg bg-canvas/60 p-3">
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white"><Icon size={15} aria-hidden="true" /></span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-surface"><Icon size={15} aria-hidden="true" /></span>
               <div className="min-w-0">
                 <p className="text-sm leading-snug">{a.title}</p>
                 <p className="text-xs text-muted">{a.time}</p>

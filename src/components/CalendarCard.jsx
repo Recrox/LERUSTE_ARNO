@@ -1,7 +1,7 @@
 import { Card, CardTitle } from './Card.jsx';
 import { week, today } from '../data.js';
 
-const dot = { muscu: 'bg-night', course: 'bg-lime-ink', bourse: 'bg-up' };
+const dot = { muscu: 'bg-data', course: 'bg-lime-ink', bourse: 'bg-up' };
 const label = { muscu: 'Musculation', course: 'Course', bourse: 'Bourse' };
 
 export default function CalendarCard() {

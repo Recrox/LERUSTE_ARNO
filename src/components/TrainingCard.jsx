@@ -20,7 +20,7 @@ export default function TrainingCard() {
                 <span className="text-[11px] tabular-nums text-muted">{fmt(l.kg)} kg</span>
                 <motion.span
                   style={{ height: `${(l.kg / max) * 80}px` }}
-                  className={`w-full origin-bottom rounded-md ${i === training.lifts.length - 1 ? 'bg-night' : 'bg-line'}`}
+                  className={`w-full origin-bottom rounded-md ${i === training.lifts.length - 1 ? 'bg-data' : 'bg-line'}`}
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 + i * 0.08 }}
@@ -46,7 +46,7 @@ export default function TrainingCard() {
           <span className="flex items-center gap-1.5 font-medium"><Footprints size={16} aria-hidden="true" /> Objectif : {goal.label}</span>
           <span className="text-xs text-ink/70">record {goal.best}</span>
         </div>
-        <div className="mt-2 h-2 rounded-full bg-white" role="progressbar" aria-label="Progression vers l’objectif course" aria-valuenow={Math.round(goal.progress * 100)} aria-valuemin={0} aria-valuemax={100}>
+        <div className="mt-2 h-2 rounded-full bg-surface" role="progressbar" aria-label="Progression vers l’objectif course" aria-valuenow={Math.round(goal.progress * 100)} aria-valuemin={0} aria-valuemax={100}>
           <motion.div className="h-full origin-left rounded-full bg-ink" style={{ width: `${goal.progress * 100}%` }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.4 }} />
         </div>
       </div>
