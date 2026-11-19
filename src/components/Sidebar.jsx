@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Search, Sun, Moon, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { navItems } from '../nav.js';
 import { load, save, isDark, toggleTheme } from '../prefs.js';
+import InstallButton from './InstallButton.jsx';
 
 const row = 'flex h-10 shrink-0 items-center gap-3 rounded-lg px-3 text-sm transition-colors';
 const idle = 'text-white/65 hover:bg-white/10 hover:text-white';
@@ -29,7 +30,7 @@ export default function Sidebar({ current, onSearch }) {
   return (
     <nav
       aria-label="Navigation principale"
-      className={`flex items-center gap-1 rounded-xl bg-night p-2 text-white lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:shrink-0 lg:flex-col lg:items-stretch lg:py-4 ${open ? 'lg:w-56' : 'lg:w-14'}`}
+      className={`hidden items-center gap-1 rounded-xl bg-night p-2 text-white lg:sticky lg:flex lg:top-4 lg:h-[calc(100vh-2rem)] lg:shrink-0 lg:flex-col lg:items-stretch lg:py-4 ${open ? 'lg:w-56' : 'lg:w-14'}`}
     >
       <a href="#/" className="mr-1 flex shrink-0 items-center gap-3 rounded-lg lg:mr-0 lg:mb-4">
         <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-lime text-sm font-bold text-night" aria-hidden="true">AL</span>
@@ -51,6 +52,9 @@ export default function Sidebar({ current, onSearch }) {
       </ul>
 
       <div className="ml-auto flex gap-1 lg:mt-auto lg:ml-0 lg:flex-col">
+        <div className="group relative">
+          <InstallButton className={`${row} w-full ${idle}`} labelClass={open ? '' : 'sr-only'} />
+        </div>
         <div className="group relative">
           <button onClick={onSearch} className={`${row} w-full ${idle}`} aria-keyshortcuts="Control+K">
             <Search size={18} className="shrink-0" aria-hidden="true" />

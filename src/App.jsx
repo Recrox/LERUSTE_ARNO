@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar.jsx';
+import MobileNav from './components/MobileNav.jsx';
 import CommandPalette from './components/CommandPalette.jsx';
 import Overview from './pages/Overview.jsx';
 import Projects from './pages/Projects.jsx';
@@ -40,9 +41,10 @@ export default function App() {
   }, [route]);
 
   return (
-    <div className="flex min-h-screen flex-col gap-4 p-4 lg:flex-row">
+    <div className="flex min-h-screen flex-col gap-4 p-4 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] lg:flex-row">
       <Sidebar current={route} onSearch={() => setPalette(true)} />
-      <main key={hash} className="w-full max-w-[1600px] min-w-0 flex-1">
+      <MobileNav current={route} onSearch={() => setPalette(true)} />
+      <main key={hash} className="w-full max-w-[1600px] min-w-0 flex-1 pb-24 lg:pb-0">
         <Page />
       </main>
       <CommandPalette open={palette} onClose={() => setPalette(false)} />

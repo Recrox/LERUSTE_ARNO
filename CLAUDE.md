@@ -22,3 +22,5 @@ Règles obligatoires : lire et appliquer [outils.md](outils.md) avant tout déve
 - `npm run check` : tests des formules, du portefeuille et de la cohérence du plan. `npm run deploy` : build + Cloudflare Workers.
 - La 3D (three.js) est chargée à la demande dans `src/house/House3D.jsx`.
 - Couleurs = tokens `@theme` dans `src/index.css` (pas de hex dans les composants).
+- PWA : `public/manifest.webmanifest`, `public/sw.js` (réseau d’abord pour les pages, cache pour /assets), `public/_headers`, icônes dans `public/icons/`. Installation : `src/pwa.js` + `InstallButton`. Changer `CACHE` dans sw.js pour vider le cache des utilisateurs.
+- Mobile (< 1024 px) : `MobileNav` (en-tête + barre d’onglets en bas + menu), la `Sidebar` n’apparaît qu’en grand écran.

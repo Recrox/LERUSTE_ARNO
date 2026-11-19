@@ -56,6 +56,12 @@
 body { @apply bg-canvas text-ink font-sans antialiased; }
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 dialog::backdrop { background: rgb(15 14 23 / 0.5); }
+/* Sur iPhone, un champ sous 16 px fait zoomer la page au focus. */
+@media (max-width: 1023px) {
+  input, select, textarea { font-size: 16px !important; }
+}
+html { -webkit-tap-highlight-color: transparent; }
+body { overscroll-behavior-y: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

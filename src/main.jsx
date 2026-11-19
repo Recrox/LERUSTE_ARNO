@@ -4,6 +4,9 @@ import './index.css';
 import App from './App.jsx';
 import { MotionGlobalConfig } from 'framer-motion';
 import { load } from './prefs.js';
+import { registerServiceWorker } from './pwa.js';
+
+registerServiceWorker();
 
 // framer-motion anime en JS : la règle CSS reduced-motion ne le coupe pas.
 MotionGlobalConfig.skipAnimations = matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -30,7 +30,7 @@ function RestTimer({ timer, onStop }) {
   const left = Math.max(0, (timer.endsAt - now) / 1000);
   useEffect(() => { if (left === 0) { beep(); onStop(); } }, [left === 0]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <div role="timer" aria-live="off" className="fixed right-4 bottom-4 z-30 flex items-center gap-4 rounded-xl bg-night px-5 py-3 text-white shadow-lg">
+    <div role="timer" aria-live="off" className="fixed right-4 bottom-24 z-30 lg:bottom-4 flex items-center gap-4 rounded-xl bg-night px-5 py-3 text-white shadow-lg">
       <div>
         <p className="text-xs text-white/60">Repos · {timer.label}</p>
         <p className="font-mono text-2xl tabular-nums">{clock(left)}</p>

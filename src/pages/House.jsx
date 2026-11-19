@@ -97,7 +97,7 @@ export default function House() {
           <div className="flex gap-1" role="group" aria-label="Vue">
             {[['2d', 'Plan 2D'], ['3d', 'Maquette 3D']].map(([id, l]) => <button key={id} aria-pressed={view === id} onClick={() => setView(id)} className={chip(view === id)}>{l}</button>)}
           </div>
-          <div className="flex gap-1" role="group" aria-label="Calques">
+          <div className="flex flex-wrap gap-1" role="group" aria-label="Calques">
             {layerButtons.map(([k, l, Icon]) => (
               <button key={k} aria-pressed={layers[k]} onClick={() => toggle(k)} className={`${chip(layers[k])} inline-flex items-center gap-1.5`}>
                 <Icon size={14} aria-hidden="true" />{l}
