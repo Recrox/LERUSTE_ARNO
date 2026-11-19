@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Trash2, Plus, TimerReset, X, Dumbbell } from 'lucide-react';
 import { Card, CardTitle } from '../../components/Card.jsx';
-import { exercises, programs, clock } from '../../sport.js';
+import { exercises, clock } from '../../sport.js';
+import ExercisePicto from '../../components/ExercisePicto.jsx';
 import { field, btnGhost, btnPrimary } from '../../ui.js';
 
 const byName = Object.fromEntries(exercises.map((e) => [e.name, e]));
@@ -42,7 +43,7 @@ function RestTimer({ timer, onStop }) {
   );
 }
 
-export default function Session({ session, setSession, goLibrary }) {
+export default function Session({ session, setSession, goLibrary, goPrograms }) {
   const [timer, setTimer] = useState(null);
 
   const update = (i, fn) => setSession((s) => s.map((item, j) => (j === i ? fn(item) : item)));
@@ -52,11 +53,10 @@ export default function Session({ session, setSession, goLibrary }) {
     const done = !item.sets[k].done;
     setField(i, k, 'done', done);
     if (done) {
-      const rest = byName[item.name]?.rest ?? 90;
+      const rest = item.target?.rest ?? byName[item.name]?.rest ?? 90;
       setTimer({ endsAt: Date.now() + rest * 1000, total: rest, label: item.name });
     }
   };
-  const loadProgram = (p) => setSession(p.items.map((name) => ({ name, sets: [newSet(), newSet(), newSet()] })));
 
   const volume = session.reduce((s, it) => s + it.sets.reduce((a, st) => a + (st.done ? (Number(st.kg) || 0) * (Number(st.reps) || 0) : 0), 0), 0);
   const doneSets = session.reduce((s, it) => s + it.sets.filter((st) => st.done).length, 0);
@@ -64,17 +64,15 @@ export default function Session({ session, setSession, goLibrary }) {
 
   return (
     <>
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="text-sm text-muted">Charger un programme</span>
-        {programs.map((p) => <button key={p.name} onClick={() => loadProgram(p)} className={btnGhost}>{p.name}</button>)}
-      </div>
-
       {session.length === 0 ? (
         <Card className="text-center">
           <Dumbbell size={28} className="mx-auto text-muted" aria-hidden="true" />
           <p className="mt-2 text-sm font-medium">Ta séance est vide</p>
-          <p className="mt-1 text-sm text-muted">Charge un programme ci-dessus ou ajoute des exercices depuis la bibliothèque</p>
-          <button onClick={goLibrary} className={`${btnPrimary} mt-4`}>Ouvrir la bibliothèque</button>
+          <p className="mt-1 text-sm text-muted">Charge une journée d’un programme ou ajoute des exercices un par un</p>
+          <div className="mt-4 flex justify-center gap-2">
+            <button onClick={goPrograms} className={btnPrimary}>Choisir un programme</button>
+            <button onClick={goLibrary} className={btnGhost}>Ouvrir la bibliothèque</button>
+          </div>
         </Card>
       ) : (
         <>
@@ -86,13 +84,25 @@ export default function Session({ session, setSession, goLibrary }) {
           <ol className="space-y-4">
             {session.map((it, i) => {
               const info = byName[it.name];
+              const t = it.target;
+              const rest = t?.rest ?? info?.rest;
               return (
                 <Card as="li" key={`${it.name}-${i}`}>
                   <CardTitle aside={
                     <button onClick={() => setSession((s) => s.filter((_, j) => j !== i))} aria-label={`Retirer ${it.name}`} className="rounded-lg p-1.5 text-muted hover:bg-canvas hover:text-ink"><Trash2 size={16} aria-hidden="true" /></button>
                   }>
-                    {i + 1}. {it.name} {info && <span className="ml-2 text-xs font-normal text-muted">objectif {info.sets} · repos {info.rest} s</span>}
+                    {i + 1}. {it.name}
                   </CardTitle>
+                  <div className="mb-3 flex items-center gap-4">
+                    {info && <ExercisePicto exercise={info} className="h-20 w-20 shrink-0 rounded-lg bg-canvas p-1" />}
+                    <dl className="grid flex-1 grid-cols-2 gap-x-4 gap-y-1 text-xs sm:grid-cols-4">
+                      <div><dt className="text-muted">Objectif</dt><dd className="font-medium">{t ? `${t.sets} × ${t.reps}` : info?.sets}</dd></div>
+                      <div><dt className="text-muted">Intensité</dt><dd className="font-medium">{t?.intensity ?? 'RPE 8'}</dd></div>
+                      <div><dt className="text-muted">Tempo</dt><dd className="font-mono font-medium">{t?.tempo ?? '2-0-1-0'}</dd></div>
+                      <div><dt className="text-muted">Repos</dt><dd className="font-medium">{rest} s</dd></div>
+                    </dl>
+                  </div>
+                  {info && <p className="mb-3 text-xs text-muted">{info.tip}</p>}
                   <table className="w-full text-sm">
                     <thead><tr className="text-left text-xs text-muted"><th className="pb-2 font-medium">Série</th><th className="pb-2 font-medium">Charge (kg)</th><th className="pb-2 font-medium">Reps</th><th className="pb-2 text-right font-medium">Faite</th></tr></thead>
                     <tbody>
@@ -108,7 +118,7 @@ export default function Session({ session, setSession, goLibrary }) {
                   </table>
                   <div className="mt-3 flex gap-2">
                     <button onClick={() => update(i, (x) => ({ ...x, sets: [...x.sets, { ...(x.sets.at(-1) ?? newSet()), done: false }] }))} className={btnGhost}><Plus size={14} aria-hidden="true" />Série</button>
-                    {info && <button onClick={() => setTimer({ endsAt: Date.now() + info.rest * 1000, total: info.rest, label: it.name })} className={btnGhost}><TimerReset size={14} aria-hidden="true" />Repos {info.rest} s</button>}
+                    {rest && <button onClick={() => setTimer({ endsAt: Date.now() + rest * 1000, total: rest, label: it.name })} className={btnGhost}><TimerReset size={14} aria-hidden="true" />Repos {rest} s</button>}
                   </div>
                 </Card>
               );

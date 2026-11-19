@@ -16,7 +16,8 @@ Règles obligatoires : lire et appliquer [outils.md](outils.md) avant tout déve
 ## Projet : tableau de bord perso
 - Stack : Vite + React 19 + Tailwind 4 + framer-motion + lucide-react.
 - `npm run dev` (dev), `npm run build`, `npm run preview`.
-- Données : `src/data.js` (portefeuille Revolut et projets réels, le reste en démo), `src/sport.js` (exercices + formules), `src/house/` (plan, réseaux, calculs de la maison).
+- Données : `src/data.js` (portefeuille Revolut et projets réels, le reste en démo), `src/sport.js` (exercices + formules), `src/training.js` (programmes, pictogrammes, guide), `src/health.js` (santé), `src/money/` (comptabilité + fiscalité belge), `src/house/` (maison).
+- Les données saisies (séance, santé, compta, objectifs, finitions) sont en localStorage via `usePersisted`, rien côté serveur.
 - Pages dans `src/pages/` (routage par hash dans `App.jsx`, entrées de menu dans `src/nav.js`) ; cartes dans `src/components/`.
 - `npm run check` : tests des formules, du portefeuille et de la cohérence du plan. `npm run deploy` : build + Cloudflare Workers.
 - La 3D (three.js) est chargée à la demande dans `src/house/House3D.jsx`.

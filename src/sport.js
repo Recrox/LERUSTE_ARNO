@@ -73,15 +73,6 @@ export const exercises = [
   ex('Suspension passive', 'Mobilité', 'Barre de traction', 'Débutant', '3 × 45 s', 45, ['Épaules', 'Colonne', 'Grip'], 'Relâche tout, laisse le poids du corps étirer le dos'),
 ];
 
-// Programmes prêts à charger dans « Ma séance ».
-export const programs = [
-  { name: 'Push lourd', items: ['Développé couché', 'Développé militaire', 'Dips lestés', 'Élévations latérales', 'Barre au front'] },
-  { name: 'Pull lourd', items: ['Soulevé de terre', 'Tractions lestées', 'Rowing Pendlay', 'Face pull', 'Curl incliné'] },
-  { name: 'Jambes', items: ['Squat barre haute', 'Soulevé de terre roumain', 'Squat bulgare', 'Nordic curl', 'Mollets debout'] },
-  { name: 'Full body athlète', items: ['Clean and press', 'Front squat', 'Tractions lestées', 'Farmer walk', 'Dragon flag'] },
-  { name: 'Conditioning 30 min', items: ['Kettlebell swing', 'Burpees', 'Box jump', 'Battle ropes', 'Bear crawl'] },
-];
-
 // ---- Formules ----
 
 // Temps en secondes → "m:ss" ou "h:mm:ss".

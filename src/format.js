@@ -18,3 +18,6 @@ export function ago(iso) {
 
 // Couleur du texte d'une variation : vert si positive, rouge si négative, neutre à zéro.
 export const tone = (n) => (n > 0 ? 'text-up' : n < 0 ? 'text-down' : 'text-muted');
+
+// Date locale du jour au format AAAA-MM-JJ (journaux santé, comptabilité).
+export const isoDate = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;

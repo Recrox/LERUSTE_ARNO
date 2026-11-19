@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs && node scripts/check-more.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.14.0",

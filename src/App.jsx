@@ -9,11 +9,13 @@ import Roles from './pages/Roles.jsx';
 import Sport from './pages/Sport.jsx';
 import House from './pages/House.jsx';
 import Goals from './pages/Goals.jsx';
+import Health from './pages/Health.jsx';
+import Money from './pages/Money.jsx';
 import { navItems } from './nav.js';
 
 // Routage par hash : aucun routeur à installer et ça marche tel quel sur un hébergement statique.
 const pages = {
-  '#/projets': Projects, '#/sport': Sport, '#/maison': House, '#/objectifs': Goals,
+  '#/projets': Projects, '#/sport': Sport, '#/sante': Health, '#/maison': House, '#/compta': Money, '#/objectifs': Goals,
   '#/analytics': Analytics, '#/portefeuille': Portfolio, '#/roles': Roles,
 };
 

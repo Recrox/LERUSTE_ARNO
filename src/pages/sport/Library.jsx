@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Search, Plus, Check, Timer } from 'lucide-react';
 import { Card } from '../../components/Card.jsx';
+import ExercisePicto from '../../components/ExercisePicto.jsx';
 import { exercises, groups, equipments } from '../../sport.js';
 import { field, chip, btnGhost } from '../../ui.js';
 
@@ -45,6 +46,9 @@ export default function Library({ inSession, onAdd }) {
             const added = inSession.includes(e.name);
             return (
               <Card as="li" key={e.name} className="flex flex-col">
+                <div className="-mx-1 -mt-1 mb-3 rounded-lg bg-canvas p-2">
+                  <ExercisePicto exercise={e} className="mx-auto h-28 w-full" />
+                </div>
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="text-sm font-semibold">{e.name}</h3>
                   <span className="flex shrink-0 items-center gap-1.5 text-xs text-muted"><span className={`size-2 rounded-full ${levelDot[e.level]}`} aria-hidden="true" />{e.level}</span>
