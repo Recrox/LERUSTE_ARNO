@@ -12,3 +12,9 @@ Règles obligatoires : lire et appliquer [outils.md](outils.md) avant tout déve
 ## Git
 - Branche par défaut : `main`.
 - Push GitHub avec le compte `Recrox` (configuré localement via `credential.https://github.com.username`).
+
+## Projet : tableau de bord perso
+- Stack : Vite + React 19 + Tailwind 4 + framer-motion + lucide-react.
+- `npm run dev` (dev), `npm run build`, `npm run preview`.
+- Données de démo dans `src/data.js` ; une carte = un fichier dans `src/components/`.
+- Couleurs = tokens `@theme` dans `src/index.css` (pas de hex dans les composants).
