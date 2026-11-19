@@ -1,4 +1,4 @@
-import { LayoutGrid, FolderGit2, Dumbbell, HeartPulse, House, Landmark, Target, ChartColumn, Wallet, ShieldCheck } from 'lucide-react';
+import { LayoutGrid, FolderGit2, Dumbbell, HeartPulse, House, Car, Landmark, Target, ChartColumn, Wallet, ShieldCheck } from 'lucide-react';
 
 export const navItems = [
   { href: '#/', icon: LayoutGrid, label: 'Vue d’ensemble' },
@@ -6,6 +6,7 @@ export const navItems = [
   { href: '#/sport', icon: Dumbbell, label: 'Sport' },
   { href: '#/sante', icon: HeartPulse, label: 'Santé' },
   { href: '#/maison', icon: House, label: 'Maison' },
+  { href: '#/voitures', icon: Car, label: 'Voitures' },
   { href: '#/compta', icon: Landmark, label: 'Comptabilité' },
   { href: '#/objectifs', icon: Target, label: 'Objectifs' },
   { href: '#/analytics', icon: ChartColumn, label: 'Analytics' },

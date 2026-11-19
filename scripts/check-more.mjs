@@ -66,4 +66,27 @@ assert.equal(autoCategory('TotalEnergies facture', -80), 'Énergie');
 assert.equal(autoCategory('Total station Mons', -60), 'Transport');
 assert.ok(parseRevolutCsv('foo,bar\n1,2').error);
 assert.deepEqual(lastMonths('2026-02', 3), ['2025-12', '2026-01', '2026-02']);
-console.log('check sport, santé, compta ok');
+// ---- Voitures ----
+const { seedCars, costSummary, consumption, reminders, carName } = await import('../src/cars.js');
+assert.equal(carName(seedCars[0]), 'Opel Karl 2017');
+const fills = [
+  { date: '2026-10-01', category: 'Carburant', amount: 60, km: 50000, liters: 35 },
+  { date: '2026-10-20', category: 'Carburant', amount: 55, km: 50600, liters: 32 },
+  { date: '2026-11-10', category: 'Carburant', amount: 52, km: 51200, liters: 30 },
+  { date: '2026-11-12', category: 'Entretien', amount: 180, km: 51250 },
+];
+const co = consumption(fills);
+assert.equal(co.km, 1200);
+assert.ok(Math.abs(co.per100 - 5.1667) < 0.001, `conso ${co.per100}`); // 62 L / 1 200 km, le 1er plein ne compte pas
+const cs = costSummary(fills, new Date(2026, 10, 20));
+assert.equal(cs.total, 347);
+assert.equal(cs.months.at(-1).amount, 232);
+assert.ok(Math.abs(cs.perKm - 347 / 1250) < 1e-9);
+assert.equal(consumption(fills.slice(0, 1)), null);
+const car = { ...seedCars[0], ctDate: '2026-12-01', insuranceDate: '2026-10-01', costs: [], issues: [{ status: 'open', severity: 'high' }] };
+const rem = reminders(car, '2026-11-20').map((r) => r.text);
+assert.ok(rem.some((t) => t.startsWith('Contrôle technique dans 11 jours')), rem.join(' | '));
+assert.ok(rem.some((t) => t.startsWith('Échéance de l’assurance : date passée')));
+assert.ok(rem.some((t) => t.includes('Aucun entretien')));
+assert.ok(rem.some((t) => t.includes('1 problème urgent')));
+console.log('check sport, santé, compta, voitures ok');
