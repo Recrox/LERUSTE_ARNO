@@ -61,7 +61,8 @@ dialog::backdrop { background: rgb(15 14 23 / 0.5); }
   input, select, textarea { font-size: 16px !important; }
 }
 html { -webkit-tap-highlight-color: transparent; }
-body { overscroll-behavior-y: none; }
+body { overscroll-behavior-y: none; overflow-x: clip; } /* filet de sécurité : jamais de défilement horizontal de la page */
+fieldset { min-width: 0; } /* par défaut un fieldset refuse de rétrécir sous son contenu */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

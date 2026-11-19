@@ -22,8 +22,8 @@ export default function Stocks() {
         <CardTitle>Taxe sur les opérations de bourse (TOB)</CardTitle>
         <div className="flex flex-wrap gap-3">
           <label className="text-xs text-muted">Montant de l’ordre (€)<input inputMode="decimal" value={order.amount} onChange={(e) => setOrder({ ...order, amount: e.target.value })} className={`${field} mt-1 block w-32`} /></label>
-          <label className="text-xs text-muted">Type de titre
-            <select value={order.kind} onChange={(e) => setOrder({ ...order, kind: e.target.value })} className={`${field} mt-1 block`}>
+          <label className="w-full min-w-0 text-xs text-muted sm:w-auto">Type de titre
+            <select value={order.kind} onChange={(e) => setOrder({ ...order, kind: e.target.value })} className={`${field} mt-1 block w-full max-w-full`}>
               {tobRates.map((r) => <option key={r.id} value={r.id}>{(r.rate * 100).toLocaleString('fr-FR')} % · {r.label}</option>)}
             </select>
           </label>

@@ -28,15 +28,14 @@ function Today({ sleep, checkins, setCheckins }) {
           <input type="range" min="3" max="11" step="0.25" value={c.sleepH} onChange={(e) => set('sleepH', Number(e.target.value))} className="mt-2 block w-full accent-[var(--color-data)]" />
         </label>
         {Object.entries(questions).map(([k, q]) => (
-          <fieldset key={k} className="mt-4">
+          <fieldset key={k} className="mt-4 min-w-0">
             <legend className="text-sm">{q.label}</legend>
-            <div className="mt-1 flex items-center gap-2 text-xs text-muted">
-              <span className="w-20">{q.low}</span>
+            <div className="mt-1 grid max-w-sm grid-cols-5 gap-2">
               {[1, 2, 3, 4, 5].map((v) => (
-                <button key={v} aria-pressed={c[k] === v} aria-label={`${q.label} ${v} sur 5`} onClick={() => set(k, v)} className={`size-9 rounded-lg text-sm font-semibold transition-colors ${c[k] === v ? 'bg-night text-white' : 'bg-canvas text-ink hover:bg-line'}`}>{v}</button>
+                <button key={v} aria-pressed={c[k] === v} aria-label={`${q.label} ${v} sur 5`} onClick={() => set(k, v)} className={`h-11 rounded-lg text-sm font-semibold transition-colors ${c[k] === v ? 'bg-night text-white' : 'bg-canvas text-ink hover:bg-line'}`}>{v}</button>
               ))}
-              <span className="w-24 text-right">{q.high}</span>
             </div>
+            <div className="mt-1 flex max-w-sm justify-between text-xs text-muted" aria-hidden="true"><span>1 · {q.low}</span><span>5 · {q.high}</span></div>
           </fieldset>
         ))}
       </Card>
